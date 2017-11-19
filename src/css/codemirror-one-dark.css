@@ -11,7 +11,7 @@
   font-family: Consolas, Monaco, monospace;
   font-weight: 300;
   font-size: 14px;
-  background-color: hsl(220, 13%, 18%);
+  background: #282b30;
   color: hsl(220, 14%, 71%);
 }
 .cm-s-one-dark div.CodeMirror-selected {

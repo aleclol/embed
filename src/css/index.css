@@ -39,7 +39,7 @@
 /* -- colors -- */
 
 .blurple            { color:            #7289DA; }
-.bg-blurple         { background-color: #7289DA; }
+.bg-blurple         { background-color: #1e2124; }
 .red                { color:            #F04747; }
 .bg-red             { background-color: #F04747; }
 .bg-discord-light   { background-color: #ffffff; }
@@ -143,7 +143,7 @@ Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
   overflow-x: auto !important;
   padding: 0.5em !important;
   color: #abb2bf !important;
-  background: #282c34 !important;
+  background: #282b30 !important;
 }
 
 .atom-one-dark > .hljs-comment,
@@ -328,9 +328,6 @@ Original One Light Syntax theme from https://github.com/atom/one-light-syntax
 .cmd-action {
   text-align: center;
   margin: 10px 0px 0px 0px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
 }
 .cmd-name > input {
   vertical-align: middle;
