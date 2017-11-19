@@ -114,7 +114,7 @@
 
 .CodeMirror {
   height: 100%;
-  border-radius: .25rem;
+  border-radius: 0;
   z-index: 0;
   font-family: Consolas, Monaco, monospace;
   font-weight: 300;
@@ -298,3 +298,58 @@ Original One Light Syntax theme from https://github.com/atom/one-light-syntax
 }
 
 /* -- highlight.js -- */
+
+/* my stuffs */
+.tabs {
+  margin: 0 auto;
+  font-size: 20px;
+  background: #424549;
+}
+.type-tab {
+  margin: 0px auto;
+  display: inline-block;
+  text-align: center;
+  border: 1px 1px 0px 1px solid #424549;
+  color: white;
+  cursor: pointer;
+  width:33.33%;
+  padding: 10px 0px 5px 0px;
+}
+.type-tab.selected {
+  background: #282b30;
+}
+.cmd-name {
+  text-align: center;
+  width: 100%;
+  background: #282b30;
+  font-size: 20px;
+  color:white;
+}
+.cmd-action {
+  text-align: center;
+  margin: 10px 0px 0px 0px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.cmd-name > input {
+  vertical-align: middle;
+  width: 40%;
+  border: 1px solid #8f8f8f;
+  background: #424549;
+  color: #cccccc;
+}
+.cmd-btn {
+  vertical-align: middle;
+  font-size: 13px;
+  padding: 5px;
+  border: 1px solid #8f8f8f;
+  margin-left: 10px;
+  color: #ccc;
+  background: #424549;
+  cursor: pointer;
+}
+
+.cmd-btn:active{
+  background: #525559;
+}

@@ -94,9 +94,9 @@ const CodeMirror = React.createClass({
   render() {
     return (
       <div className={this.props.className}>
-        <textarea
+        <textarea readOnly 
           ref={(textarea) => this.textarea = textarea}
-          defaultValue={this.props.value}
+          value={this.props.value}
           autoComplete="off"
         />
       </div>

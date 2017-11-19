@@ -1,11 +1,9 @@
 import React from 'react';
 
 import Button from './button';
-import ModalContainer from './modalcontainer';
-import AboutModal from './aboutmodal';
-import CodeModal from './codemodal';
 import CodeMirror from './codemirror';
 import DiscordView from './discordview';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import Ajv from 'ajv';
 import {
@@ -26,15 +24,6 @@ const FooterButton = (props) => {
   return <Button {...props} className='shadow-1 shadow-hover-2 shadow-up-hover' />;
 };
 
-const Modals = {
-  About(props) {
-    return <AboutModal {...props} />;
-  },
-  Code(props) {
-    return <CodeModal {...props} />;
-  },
-};
-
 // this is just for convenience.
 // TODO: vary this more?
 const initialCode = JSON.stringify({
@@ -45,20 +34,11 @@ const initialCode = JSON.stringify({
     url: 'https://discordapp.com',
     color: Math.floor(Math.random() * 0xFFFFFF),
     timestamp: new Date().toISOString(),
-    footer: { icon_url: 'https://cdn.discordapp.com/embed/avatars/0.png', text: 'footer text' },
     thumbnail: { url: 'https://cdn.discordapp.com/embed/avatars/0.png' },
     image: { url: 'https://cdn.discordapp.com/embed/avatars/0.png' },
-    author: {
-      name: 'author name',
-      url: 'https://discordapp.com',
-      icon_url: 'https://cdn.discordapp.com/embed/avatars/0.png'
-    },
     fields: [
       { name: '🤔', value: 'some of these properties have certain limits...' },
-      { name: '😱', value: 'try exceeding some of them!' },
-      { name: '🙄', value: 'an informative error should show up, and this view will remain as-is until all issues are fixed' },
-      { name: '<:thonkang:219069250692841473>', value: 'these last two', inline: true },
-      { name: '<:thonkang:219069250692841473>', value: 'are inline fields', inline: true }
+
     ]
   }
 }, null, '  ');
@@ -71,10 +51,11 @@ const App = React.createClass({
       webhookMode: false,
       compactMode: false,
       darkTheme: true,
-      currentModal: null,
       input: initialCode,
       data: {},
-      error: null
+      error: null,
+      viewType: 0,
+      viewCommand: "Name"
     };
   },
 
@@ -99,7 +80,7 @@ const App = React.createClass({
     if (parseError) {
       error = parseError;
     } else if (!isValid) {
-      error  = validationError;
+      error = validationError;
     }
 
     // we set all these here to avoid some re-renders.
@@ -120,18 +101,6 @@ const App = React.createClass({
     }
   },
 
-  openAboutModal() {
-    this.setState({ currentModal: Modals.About });
-  },
-
-  openCodeModal() {
-    this.setState({ currentModal: Modals.Code });
-  },
-
-  closeModal() {
-    this.setState({ currentModal: null });
-  },
-
   toggleWebhookMode() {
     this.validateInput(this.state.input, !this.state.webhookMode);
   },
@@ -144,24 +113,34 @@ const App = React.createClass({
     this.setState({ compactMode: !this.state.compactMode });
   },
 
+  setViewType(n) {
+    this.setState({ viewType: n });
+  },
+
+  setViewCommand(e) {
+    this.setState({ viewCommand: e.target.value });
+  },
+
   render() {
     const webhookModeLabel = `${this.state.webhookMode ? 'Dis' : 'En'}able webhook mode`;
     const themeLabel = `${this.state.darkTheme ? 'Light' : 'Dark'} theme`;
     const compactModeLabel = `${this.state.compactMode ? 'Cozy' : 'Compact'} mode`;
+    const typeTabClasses = "type-tab align-middle open-sans";
 
+    var prefix = "";
+    const vc = this.state.viewCommand;
+    if (this.state.viewType == 1)
+      prefix = ".acr \"" + vc + "\" ";
+    else if (this.state.viewType == 2)
+      prefix = ".. \"" + vc + "\" ";
+
+    const input = prefix + this.state.input;
     return (
-      <main className="vh-100-l bg-blurple open-sans">
+      <main className="vh-100-l bg-blurple open-sans ">
 
         <div className="h-100 flex flex-column">
           <section className="flex-l flex-auto">
             <div className="vh-100 h-auto-l w-100 w-50-l pa4 pr3-l pb0-l">
-              <CodeMirror
-                onChange={this.onCodeChange}
-                value={this.state.input}
-                theme={this.state.darkTheme ? 'one-dark' : 'default'}
-              />
-            </div>
-            <div className="vh-100 h-auto-l w-100 w-50-l pa4 pl3-l pb0">
               <DiscordView
                 data={this.state.data}
                 error={this.state.error}
@@ -170,25 +149,35 @@ const App = React.createClass({
                 compactMode={this.state.compactMode}
               />
             </div>
+            <div className="vh-100 h-auto-l w-100 w-50-l pa4 pl3-l pb0">
+              <div className="tabs align-middle">
+                <div className={typeTabClasses + (this.state.viewType == 0 ? " selected" : "")} onClick={() => this.setViewType(0)}>None</div>
+                <div className={typeTabClasses + (this.state.viewType == 1 ? " selected" : "")} onClick={() => this.setViewType(1)}>Custom Reaction</div>
+                <div className={typeTabClasses + (this.state.viewType == 2 ? " selected" : "")} onClick={() => this.setViewType(2)}>Quote</div>
+              </div>
+              <div className="cmd-name">
+                <input
+                  onFocus={(e) => e.target.select()}
+                  className="cmd-action input"
+                  hidden={this.state.viewType == 0}
+                  defaultValue={this.state.viewCommand}
+                  type="text" placeholder="Name"
+                  onChange={(e) => this.setViewCommand(e)} />
+                <CopyToClipboard text={input}>
+                  <button className="cmd-btn cmd-action">Copy 🔗</button>
+                </CopyToClipboard>
+              </div>
+              <CodeMirror
+                value={input}
+                theme={'one-dark'}
+              />
+            </div>
           </section>
 
+
           <footer className="w-100 pa3 tc white">
-            <FooterButton label="Generate code" onClick={this.openCodeModal} />
-            <FooterButton label={webhookModeLabel} onClick={this.toggleWebhookMode} />
-            <FooterButton label={themeLabel} onClick={this.toggleTheme} />
-            <FooterButton label={compactModeLabel} onClick={this.toggleCompactMode} />
-            <FooterButton label="About" onClick={this.openAboutModal} />
           </footer>
         </div>
-
-        <ModalContainer
-          close={this.closeModal}
-          data={this.state.data}
-          webhookMode={this.state.webhookMode}
-          darkTheme={this.state.darkTheme}
-          hasError={this.state.error !== null && this.state.error !== ''}
-          currentModal={this.state.currentModal}
-        />
       </main>
     );
   },
