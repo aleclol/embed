@@ -24,20 +24,28 @@ const FooterButton = (props) => {
   return <Button {...props} className='shadow-1 shadow-hover-2 shadow-up-hover' />;
 };
 
-// this is just for convenience.
-// TODO: vary this more?
 const initialCode = JSON.stringify({
   content: 'this `supports` __a__ **subset** *of* ~~markdown~~ 😃 ```js\nfunction foo(bar) {\n  console.log(bar);\n}\n\nfoo(1);```',
   embed: {
-    title: 'title ~~(did you know you can have markdown here too?)~~',
-    description: 'this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```',
+    title: 'title, turns blue and is clickable if you specify url',
     url: 'https://discordapp.com',
+    description: 'this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```',
+    author: {
+      name: "Author, when editing you can add a url too, and an icon_url",
+      url: "https://google.com",
+      icon_url: "http://img15.deviantart.net/8746/i/2014/011/c/8/sengoku_nadeko___snake_god_by_phluxxor-d6xy7mm.png"
+    },
     color: Math.floor(Math.random() * 0xFFFFFF),
-    timestamp: new Date().toISOString(),
+    footer: {
+      text: "This is footer. you can specify icon_url",
+      icon_url: "http://img15.deviantart.net/8746/i/2014/011/c/8/sengoku_nadeko___snake_god_by_phluxxor-d6xy7mm.png"
+    },
     thumbnail: { url: 'https://cdn.discordapp.com/embed/avatars/0.png' },
     image: { url: 'https://cdn.discordapp.com/embed/avatars/0.png' },
     fields: [
-      { name: '🤔', value: 'some of these properties have certain limits...' },
+      { name: 'one', value: 'Inline fields are next to each other.\nAs you can see.', inline: true },
+      { name: 'two', value: 'Also, you can only\n Have up to 3 inline fields', inline: true },
+      { name: 'three', value: 'This one is not inline.', inline: false },
 
     ]
   }
