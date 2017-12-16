@@ -1,61 +1,15 @@
 import React from 'react';
-import Moment from 'moment';
-import Embed from './embed';
-import { parse, parseAllowLinks, jumboify } from './markdown';
 
-
-const MessageTimestamp = React.createClass({
-  getInitialState() {
-    return { moment: Moment() };
-  },
-
-  getDefaultProps() {
-    return { compactMode: false };
-  },
-
-  componentDidMount() {
-    this.timer = setInterval(() => this.tick(), 1000 * 60);
-  },
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  },
-
-  tick() {
-    this.forceUpdate();
-  },
-
-  render() {
-    const { compactMode } = this.props;
-    const computed = compactMode ? this.state.moment.format('LT') : this.state.moment.calendar();
-
-    return <span className="timestamp">{computed}</span>;
-  },
-});
-
-const MessageBody = ({ compactMode, username, content, webhookMode }) => {
-  if (compactMode) {
-    return (
-      <div className="markup">
-        <MessageTimestamp compactMode={compactMode} />
-        <span className="username-wrapper v-btm">
-          <strong className="user-name">{username}</strong>
-          <span className="bot-tag">BOT</span>
-        </span>
-        <span className="highlight-separator"> - </span>
-        <span className="message-content">{content && parse(content, true, {}, jumboify)}</span>
-      </div>
-    );
-  } else if (content) {
-    if (webhookMode) {
-      return <div className="markup">{parseAllowLinks(content, true, {}, jumboify)}</div>;
-    }
-
-    return <div className="markup">{parse(content, true, {}, jumboify)}</div>;
-  }
-
-  return null;
-};
+import AuthorContainer from './author';
+import TitleContainer from './title';
+import ColorpillContainer from './colorpill';
+import DescriptionContainer from './description';
+import FieldsContainer from './fields';
+import FooterContainer from './footer';
+import ImageContainer from './image';
+import ThumbnailContainer from './thumbnail';
+import MessageBodyContainer from './messagebody';
+import MessageTimestamp from 'components/common/timestamp';
 
 const CozyMessageHeader = ({ compactMode, username }) => {
   if (compactMode) {
@@ -130,7 +84,6 @@ const DiscordView = React.createClass({
     const {
       compactMode, darkTheme, webhookMode,
       username, avatar_url, error,
-      data: { content, embed, embeds }
     } = this.props;
 
     const bgColor = darkTheme ? 'bg-discord-dark' : 'bg-discord-light';
@@ -146,16 +99,31 @@ const DiscordView = React.createClass({
               <div className="message first">
                 <CozyMessageHeader username={username} compactMode={compactMode} />
                 <div className="message-text">
-                  <MessageBody
-                    content={content}
+                  <MessageBodyContainer
                     username={username}
                     compactMode={compactMode}
                     webhookMode={webhookMode}
                   />
                 </div>
-                {embed ? <Embed {...embed} /> : (embeds && embeds.map((e, i) => <Embed key={i} {...e} />))}
+                <div className="accessory">
+                  <div className="embed-wrapper">
+                    <ColorpillContainer/>
+                    <div className="embed embed-rich">
+                      <div className="embed-content">
+                        <div className="embed-content-inner">
+                          <AuthorContainer/>
+                          <TitleContainer/>
+                          <DescriptionContainer/>
+                          <FieldsContainer/>
+                        </div>
+                        <ThumbnailContainer/>
+                      </div>
+                      <ImageContainer/>
+                      <FooterContainer/>
+                      </div>
+                    </div>
+                  </div>
               </div>
-
             </div>
           </div>
         </DiscordViewWrapper>

@@ -12,6 +12,21 @@ import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/mode/javascript/javascript';
 
+import Ajv from 'ajv';
+import {
+  botMessageSchema,
+  webhookMessageSchema,
+  registerKeywords,
+  stringifyErrors
+} from 'lib/validation';
+
+
+const ajv = registerKeywords(new Ajv({ allErrors: true }));
+const validators = {
+  regular: ajv.compile(botMessageSchema),
+  webhook: ajv.compile(webhookMessageSchema)
+};
+
 
 const convertLineEndings = (str) => {
   if (!str) return str;
@@ -43,6 +58,37 @@ const CodeMirror = React.createClass({
       },
       preserveScrollPosition: false
     };
+  },
+
+  validateInput(input, webhookMode) {
+    let parsed, parseError, isValid, validationError;
+    const validator = webhookMode ? validators.webhook : validators.regular;
+
+    try {
+      parsed = JSON.parse(input);
+      isValid = validator(parsed);
+      validationError = stringifyErrors(parsed, validator.errors);
+    } catch (e) {
+      parseError = e.message;
+    }
+
+    let data = this.state.data;
+    if (isValid) {
+      data = parsed;
+    }
+
+    let error = '';
+    if (parseError) {
+      error = parseError;
+    } else if (!isValid) {
+      error = validationError;
+    }
+
+    // we set all these here to avoid some re-renders.
+    // maybe it's okay (and if we ever want to
+    // debounce validation, we need to take some of these out)
+    // but for now that's what we do.
+    this.setState({ input, data, error, webhookMode });
   },
 
   componentDidMount() {

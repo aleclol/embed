@@ -1,4 +1,4 @@
-import { botMessageSchema, webhookMessageSchema } from './constants/embedschema';
+import { botMessageSchema, webhookMessageSchema } from 'constants/embedschema';
 
 
 function traverseObject(object, path) {
