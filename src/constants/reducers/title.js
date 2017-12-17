@@ -1,5 +1,4 @@
-import { SET_EMBED_TITLE } from 'constants/types';
-import { SET_EMBED_TITLE_URL } from 'constants/types';
+import { SET_TITLE } from 'constants/types';
 
 const initState = {
     title: '',
@@ -8,10 +7,8 @@ const initState = {
 
 const title = (state = initState, action) => {
     switch (action.type) {
-        case SET_EMBED_TITLE:
-            return {title: action.content, ...state}
-        case SET_EMBED_TITLE_URL:
-            return {url: action.url, ...state}
+        case SET_TITLE:
+            return {...action.titleContent}
         default:
             return state
     }

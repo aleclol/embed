@@ -1,7 +1,6 @@
 import {
   SET_MESSAGE_BODY,
   SET_TITLE,
-  SET_TITLE_URL
 } from 'constants/types';
 
 export const setMessageBody = content => {
@@ -11,16 +10,9 @@ export const setMessageBody = content => {
     }
   }
 
-export const setTitle = title => {
+export const setTitle = titleContent => {
   return {
-    type: SET_TITLE,
-    title
-  }
-}
-
-export const setTitleUrl = url => {
-  return {
-    type: SET_TITLE_URL,
-    url
+    type: SET_TITLE, 
+    titleContent
   }
 }

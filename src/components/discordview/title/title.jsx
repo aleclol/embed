@@ -1,35 +1,25 @@
 import React from 'react';
 import Link from 'components/common/link'
+import onClickOutside from "react-onclickoutside";
 
 class EmbedTitle extends React.Component {  
   constructor(props){
     super(props)
     this.state = {
-      isEdited: (this.props.parsedTitle.length>0)?false:true,
+      url: '',
+      title: '',
+      isEdited: true,
       isUrlEdited: false
     }
-    this.enterEditMode = this.enterEditMode.bind(this);
-    this.exitEditMode = this.exitEditMode.bind(this);
-    this.enterUrlEditMode = this.enterUrlEditMode.bind(this);
-    this.exitUrlEditMode = this.exitUrlEditMode.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this)
   }
 
-  enterEditMode(ev){
-    this.setState({isEdited: true, ...this.state})
-  }
-  
-  exitEditMode(ev){
-    this.setState({isEdited: false, ...this.state})
-    this.props.onEdit(ev.target.value)
-  }
-  
-  enterUrlEditMode(ev){
-    this.setState({isUrlEdited: true, ...this.state})
-  }
-  
-  exitUrlEditMode(ev){
-    this.setState({isUrlEdited: false, ...this.state})
-    this.props.onUrlEdit(ev.target.value)
+  handleClickOutside = ev => {
+    if (this.state.isEdited){
+      let content = (({url, title})=>({url, title}))(this.state)
+      this.props.onUpdate(content)
+      this.setState({isUrlEdited: false, isEdited: false})
+    }
   }
 
   render(){
@@ -37,20 +27,30 @@ class EmbedTitle extends React.Component {
       title: 'title, turns blue and is clickable if you specify url',
       url: 'https://discordapp.com'
     }
+
     let urlContent = this.state.isUrlEdited?
-      <input type="text" placeholder={placeholder.url} onChange={this.exitUrlEditMode}></input>
-      :<button onClick={this.enterUrlEditMode}>Add URL</button>
-    let content = this.state.isEdited?
-      [<input type="text" placeholder={placeholder.title} onChange={this.exitEditMode}></input>,urlContent]
+      <input key="url" type="text" placeholder={placeholder.url} value={this.state.url}
+        onChange={(ev)=>this.setState({url: ev.target.value})}>
+      </input>
+    :<button key="urlButton" onClick={()=>this.setState({isUrlEdited: true})}>
+        Add URL
+      </button>
+
+    let content = this.state.isEdited?[
+      <input key="title" type="text" placeholder={placeholder.title} onChange={(ev)=>this.setState({title: ev.target.value})}>
+      </input>,
+      urlContent
+    ]
       :this.props.parsedTitle
-    let computed = <div className="embed-title">{content}</div>;
-    console.log(content);
-    if (this.props.urlEntered) {
-      computed = <Link href={this.props.url} className="embed-title">{content}</Link>;
-    }
   
-    return computed;
+    return (this.state.url.length>0)?
+      <Link href={this.props.url} className="embed-title" onClick={()=>this.setState({isEdited: true})}>
+        {content}
+      </Link>
+      :<div className="embed-title" onClick={()=>this.setState({isEdited: true})}>
+        {content}
+      </div>;
   };
 }
 
-export default EmbedTitle
+export default onClickOutside(EmbedTitle)

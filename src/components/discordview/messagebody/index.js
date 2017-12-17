@@ -3,7 +3,7 @@ import { setMessageBody } from 'constants/actions'
 import { parse, jumboify } from 'lib/markdown'
 import MessageBody from './messagebody'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     parsedContent: parse(state.messageBody, true, {}, jumboify)
   }

@@ -19,6 +19,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^15.4.2",
+    "react-onclickoutside": "^6.7.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "simple-markdown": "^0.2.1",

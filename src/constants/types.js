@@ -2,7 +2,6 @@
 
 export const SET_MESSAGE_BODY = 'set_messagebody';
 export const SET_TITLE = 'set_title'
-export const SET_TITLE_URL = 'set_title_url'
 export const SET_LINK_URL = 'set_link_url'
 export const SET_COLOR = 'set_color'
 export const SET_AUTHOR = 'set_author'
