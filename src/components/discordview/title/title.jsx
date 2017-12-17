@@ -16,41 +16,70 @@ class EmbedTitle extends React.Component {
 
   handleClickOutside = ev => {
     if (this.state.isEdited){
-      let content = (({url, title})=>({url, title}))(this.state)
-      this.props.onUpdate(content)
+      let {url, title} = this.state
+      this.props.onUpdate({url, title})
       this.setState({isUrlEdited: false, isEdited: false})
     }
   }
 
-  render(){
-    const placeholder = {
-      title: 'title, turns blue and is clickable if you specify url',
-      url: 'https://discordapp.com'
-    }
-
-    let urlContent = this.state.isUrlEdited?
-      <input key="url" type="text" placeholder={placeholder.url} value={this.state.url}
-        onChange={(ev)=>this.setState({url: ev.target.value})}>
-      </input>
-    :<button key="urlButton" onClick={()=>this.setState({isUrlEdited: true})}>
+  renderUrlPrompt(){
+    return this.state.isUrlEdited ?
+      <input
+        key="url"
+        type="text"
+        placeholder="https://discordapp.com"
+        value={this.state.url}
+        onChange={(ev)=>this.setState({url: ev.target.value})}
+      /> :
+      <button onClick={()=>this.setState({isUrlEdited: true})}>
         Add URL
-      </button>
-
-    let content = this.state.isEdited?[
-      <input key="title" type="text" placeholder={placeholder.title} onChange={(ev)=>this.setState({title: ev.target.value})}>
-      </input>,
-      urlContent
-    ]
-      :this.props.parsedTitle
+      </button>;
+  }
   
-    return (this.state.url.length>0)?
-      <Link href={this.props.url} className="embed-title" onClick={()=>this.setState({isEdited: true})}>
-        {content}
-      </Link>
-      :<div className="embed-title" onClick={()=>this.setState({isEdited: true})}>
-        {content}
-      </div>;
-  };
+  renderTitlePrompt(){
+    return <input
+      placeholder="title:"
+      key="title"
+      type="text"
+      value={this.state.title}
+      onChange={(ev)=>this.setState({title: ev.target.value})}
+    />;
+  }
+  
+  renderLink(){
+  return <Link 
+    href={this.state.url} 
+    className="embed-title edit-button-modal-wrapper">
+    {this.props.parsedTitle}
+    <div className="edit-button-modal">
+      <button onClick={(e)=>{
+        e.preventDefault()
+        this.setState({isEdited: true})
+      }}>
+        Edit
+      </button>
+    </div>
+  </Link>
+  }
+
+renderTitle(){
+  return <div 
+    className="embed-title" 
+    onClick={()=>this.setState({isEdited: true})}>
+    {this.props.parsedTitle}
+  </div>;
+}
+
+render(){
+  return this.state.isEdited ?
+    <div className="embed-title">
+      {this.renderTitlePrompt()}
+      {this.renderUrlPrompt()}
+    </div> :
+    (this.state.url.length>0) ?
+    this.renderLink() :
+    this.renderTitle()
+}
 }
 
 export default onClickOutside(EmbedTitle)

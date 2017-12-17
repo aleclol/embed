@@ -1118,3 +1118,16 @@
   color: #00b0f4;
   text-decoration: none
 }
+
+.edit-button-modal{ display: none; }
+.edit-button-modal-wrapper:hover .edit-button-modal{ display: block; }
+
+.edit-button-modal-wrapper{
+  position: relative;
+}
+
+.edit-button-modal{
+  position: absolute;
+  top: 100%;
+  background: gray;
+}
