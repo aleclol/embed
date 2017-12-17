@@ -3,10 +3,10 @@ import {
   SET_TITLE,
 } from 'constants/types';
 
-export const setMessageBody = content => {
+export const setMessageBody = messageBody => {
     return {
       type: SET_MESSAGE_BODY,
-      content
+      messageBody
     }
   }
 
