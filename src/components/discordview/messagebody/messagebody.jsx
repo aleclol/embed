@@ -12,7 +12,7 @@ class MessageBody extends React.Component {
   }
 
   handleClickOutside = ev => {
-    if (this.state.isEdited){
+    if (this.state.isEdited && this.state.content.length>0){
       let {content} = this.state
       this.props.onChangeContent(content)
       this.setState({isEdited: false})

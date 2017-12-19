@@ -15,7 +15,7 @@ class EmbedTitle extends React.Component {
   }
 
   handleClickOutside = ev => {
-    if (this.state.isEdited){
+    if (this.state.isEdited && this.state.title.length>0){
       let {url, title} = this.state
       this.props.onUpdate({url, title})
       this.setState({isUrlEdited: false, isEdited: false})
@@ -27,7 +27,7 @@ class EmbedTitle extends React.Component {
       <input
         key="url"
         type="text"
-        placeholder="https://discordapp.com"
+        placeholder="Title URL:"
         value={this.state.url}
         onChange={(ev)=>this.setState({url: ev.target.value})}
       /> :
@@ -38,7 +38,7 @@ class EmbedTitle extends React.Component {
   
   renderTitlePrompt(){
     return <input
-      placeholder="title:"
+      placeholder="Title:"
       key="title"
       type="text"
       value={this.state.title}
@@ -62,24 +62,24 @@ class EmbedTitle extends React.Component {
   </Link>
   }
 
-renderTitle(){
-  return <div 
-    className="embed-title" 
-    onClick={()=>this.setState({isEdited: true})}>
-    {this.props.parsedTitle}
-  </div>;
-}
+  renderTitle(){
+    return <div 
+      className="embed-title" 
+      onClick={()=>this.setState({isEdited: true})}>
+      {this.props.parsedTitle}
+    </div>;
+  }
 
-render(){
-  return this.state.isEdited ?
-    <div className="embed-title">
-      {this.renderTitlePrompt()}
-      {this.renderUrlPrompt()}
-    </div> :
-    (this.state.url.length>0) ?
-    this.renderLink() :
-    this.renderTitle()
-}
+  render(){
+    return this.state.isEdited ?
+      <div className="embed-title">
+        {this.renderTitlePrompt()}
+        {this.renderUrlPrompt()}
+      </div> :
+      (this.state.url.length>0) ?
+      this.renderLink() :
+      this.renderTitle()
+  }
 }
 
 export default onClickOutside(EmbedTitle)
