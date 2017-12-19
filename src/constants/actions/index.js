@@ -4,7 +4,9 @@ import {
   SET_AUTHOR,
   SET_DESCRIPTION,
   SET_IMAGE,
-  SET_THUMBNAIL
+  SET_THUMBNAIL,
+  SET_COLOR,
+  SET_FOOTER
 } from 'constants/types';
 
 export const setMessageBody = messageBody => {
@@ -14,17 +16,17 @@ export const setMessageBody = messageBody => {
     }
   }
 
-export const setTitle = titleContent => {
+export const setTitle = title => {
   return {
     type: SET_TITLE, 
-    titleContent
+    title
   }
 }
 
-export const setAuthor = authorContent => {
+export const setAuthor = author => {
   return {
     type: SET_AUTHOR, 
-    authorContent
+    author
   }
 }
 
@@ -46,5 +48,19 @@ export const setThumbnail = thumbnail => {
   return {
     type: SET_THUMBNAIL,
     thumbnail
+  }
+}
+
+export const setColor = color => {
+  return {
+    type: SET_COLOR,
+    color
+  }
+}
+
+export const setFooter = footer => {
+  return {
+    type: SET_FOOTER, 
+    footer
   }
 }

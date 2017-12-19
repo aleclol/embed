@@ -9,7 +9,7 @@ const initState = {
 const author = (state = initState, action) => {
     switch (action.type) {
         case SET_AUTHOR:
-            return {...action.authorContent}
+            return {...state, ...action.author}
         default:
             return state
     }

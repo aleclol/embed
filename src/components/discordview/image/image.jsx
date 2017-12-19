@@ -5,15 +5,12 @@ class EmbedImage extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      isEdited: true,
-      url: ''
+      isEdited: true
     }
   }
 
   handleClickOutside = ev => {
-    if (this.state.isEdited && this.state.url.length>0){
-      let {url} = this.state
-      this.props.onUpdate(url)
+    if (this.state.isEdited && this.props.url.length>0){
       this.setState({isEdited: false})
     }
   }
@@ -23,13 +20,13 @@ class EmbedImage extends React.Component {
     <input 
       placeholder="Image URL:"
       type="text"
-      value={this.state.url}
-      onChange={(ev)=>this.setState({url: ev.target.value})}/> :
+      value={this.props.url}
+      onChange={(ev)=>this.props.onUpdate(ev.target.value)}/> :
     <a
     className="embed-thumbnail embed-thumbnail-rich edit-button-modal-wrapper">
       <img
         alt="X"
-        src={this.state.url} 
+        src={this.props.url} 
         role="presentation" 
         className="image"
         style={{ maxWidth: 80, maxHeight: 80 }}/>

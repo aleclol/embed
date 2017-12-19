@@ -7,24 +7,21 @@ class MessageBody extends React.Component {
     super(props)
     this.state = {
       isEdited: true,
-      content: ''
     }
   }
 
   handleClickOutside = ev => {
-    if (this.state.isEdited && this.state.content.length>0){
-      let {content} = this.state
-      this.props.onChangeContent(content)
+    if (this.state.isEdited && this.props.content.length>0){
       this.setState({isEdited: false})
     }
   }
 
   renderInput(){
     return <textarea 
-    value={this.state.content} 
-    onChange={(ev)=>this.setState({content: ev.target.value})}
-    placeholder="Markdown accepted">
-      {this.state.content}
+    value={this.props.content} 
+    onChange={(ev)=>this.props.onUpdate(ev.target.value)}
+    placeholder="Message body, markdown accepted">
+      {this.props.content}
     </textarea>
   }
 

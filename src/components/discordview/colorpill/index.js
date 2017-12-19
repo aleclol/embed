@@ -1,5 +1,24 @@
-import EmbedColorpill from './colorpill'
+import { connect } from 'react-redux'
+import { setColor } from 'constants/actions'
+import EmbedColorPill from './colorpill'
 
-const ColorpillContainer = EmbedColorpill
+const mapStateToProps = (state) => {
+  return {
+    color: state.color
+  }
+}
 
-export default ColorpillContainer
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUpdate: (color) => {
+      dispatch(setColor(color))
+    }
+  }
+}
+
+const ColorPillContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmbedColorPill)
+
+export default ColorPillContainer

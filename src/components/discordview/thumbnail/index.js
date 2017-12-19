@@ -2,7 +2,9 @@ import { connect } from 'react-redux'
 import { setThumbnail } from 'constants/actions'
 import EmbedThumbnail from './thumbnail'
 
-const mapStateToProps = (state) => {}
+const mapStateToProps = (state) => {
+  return { url: state.thumbnail }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {

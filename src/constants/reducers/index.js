@@ -5,6 +5,8 @@ import author from './author'
 import description from './description'
 import image from './image'
 import thumbnail from './thumbnail'
+import color from './color'
+import footer from './footer'
 
 const visualApp = combineReducers({
   messageBody,
@@ -12,7 +14,9 @@ const visualApp = combineReducers({
   author,
   description,
   image,
-  thumbnail
+  thumbnail,
+  color,
+  footer
   })
 
 export default visualApp

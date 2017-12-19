@@ -6,18 +6,13 @@ class EmbedTitle extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      url: '',
-      title: '',
       isEdited: true,
       isUrlEdited: false
     }
-    this.handleClickOutside = this.handleClickOutside.bind(this)
   }
 
   handleClickOutside = ev => {
-    if (this.state.isEdited && this.state.title.length>0){
-      let {url, title} = this.state
-      this.props.onUpdate({url, title})
+    if (this.state.isEdited && this.props.title.length>0){
       this.setState({isUrlEdited: false, isEdited: false})
     }
   }
@@ -28,8 +23,8 @@ class EmbedTitle extends React.Component {
         key="url"
         type="text"
         placeholder="Title URL:"
-        value={this.state.url}
-        onChange={(ev)=>this.setState({url: ev.target.value})}
+        value={this.props.url}
+        onChange={(ev)=>this.props.onUpdate({url: ev.target.value})}
       /> :
       <button onClick={()=>this.setState({isUrlEdited: true})}>
         Add URL
@@ -41,14 +36,14 @@ class EmbedTitle extends React.Component {
       placeholder="Title:"
       key="title"
       type="text"
-      value={this.state.title}
-      onChange={(ev)=>this.setState({title: ev.target.value})}
+      value={this.props.title}
+      onChange={(ev)=>this.props.onUpdate({title: ev.target.value})}
     />;
   }
   
   renderLink(){
   return <Link 
-    href={this.state.url} 
+    href={this.props.url} 
     className="embed-title edit-button-modal-wrapper">
     {this.props.parsedTitle}
     <div className="edit-button-modal">
@@ -76,7 +71,7 @@ class EmbedTitle extends React.Component {
         {this.renderTitlePrompt()}
         {this.renderUrlPrompt()}
       </div> :
-      (this.state.url.length>0) ?
+      (this.props.url.length>0) ?
       this.renderLink() :
       this.renderTitle()
   }

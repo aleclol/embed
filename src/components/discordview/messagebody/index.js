@@ -5,13 +5,14 @@ import MessageBody from './messagebody'
 
 const mapStateToProps = (state) => {
   return {
-    parsedContent: parse(state.messageBody, true, {}, jumboify)
+    parsedContent: parse(state.messageBody, true, {}, jumboify),
+    content: state.messageBody
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChangeContent: (content) => {
+    onUpdate: (content) => {
       dispatch(setMessageBody(content))
     }
   }

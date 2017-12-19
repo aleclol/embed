@@ -5,15 +5,12 @@ class EmbedThumbnail extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      isEdited: true,
-      url: ''
+      isEdited: true
     }
   }
 
   handleClickOutside = ev => {
-    if (this.state.isEdited && this.state.url.length>0){
-      let {url} = this.state
-      this.props.onUpdate(url)
+    if (this.state.isEdited && this.props.url.length>0){
       this.setState({isEdited: false})
     }
   }
@@ -23,11 +20,11 @@ class EmbedThumbnail extends React.Component {
     <input 
       placeholder="Thumbnail URL:"
       type="text"
-      value={this.state.url}
-      onChange={(ev)=>this.setState({url: ev.target.value})}/> :
+      value={this.props.url}
+      onChange={(ev)=>this.props.onUpdate(ev.target.value)}/> :
     <img
       alt="X"
-      src={this.state.url} 
+      src={this.props.url} 
       role="presentation" 
       className="embed-rich-thumb"
       style={{ maxWidth: 80, maxHeight: 80 }}

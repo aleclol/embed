@@ -8,7 +8,7 @@ const initState = {
 const title = (state = initState, action) => {
     switch (action.type) {
         case SET_TITLE:
-            return {...action.titleContent}
+            return {...state, ...action.title}
         default:
             return state
     }

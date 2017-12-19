@@ -6,6 +6,7 @@ import EmbedTitle from './title'
 const mapStateToProps = (state) => {
   return {
     parsedTitle: parseEmbedTitle(state.title.title),
+    ...state.title
   }
 }
 

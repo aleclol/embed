@@ -9,21 +9,14 @@ class EmbedAuthor extends React.Component {
       isEdited: true,
       isUrlEdited: false,
       isIconUrlEdited: true,
-      name: '',
-      iconUrl: '',
-      url: ''
     }
   }
 
   handleClickOutside = ev => {
-      if (this.state.isEdited && this.state.name.length>0){
-        let {name, url, iconUrl} = this.state
-        this.props.onUpdate({name, url, iconUrl})
+      if (this.state.isEdited && this.props.name.length>0){
         this.setState({isUrlEdited: false, isEdited: false})
       }
-      if (this.state.isIconUrlEdited && this.state.iconUrl.length>0){
-        let {name, url, iconUrl} = this.state
-        this.props.onUpdate({name, url, iconUrl})
+      if (this.state.isIconUrlEdited && this.props.iconUrl.length>0){
         this.setState({isIconUrlEdited: false})
       }
   }
@@ -34,11 +27,11 @@ class EmbedAuthor extends React.Component {
       placeholder="Icon URL:"
       type="text"
       key="icon-url"
-      value={this.state.iconUrl}
-      onChange={(ev)=>this.setState({iconUrl: ev.target.value})}/> :
+      value={this.props.iconUrl}
+      onChange={(ev)=>this.props.onUpdate({iconUrl: ev.target.value})}/> :
     <img
       alt="X"
-      src={this.state.iconUrl} 
+      src={this.props.iconUrl} 
       role="presentation" 
       className="embed-author-icon"
       onClick={()=>this.setState({isIconUrlEdited: true})}/>;
@@ -50,8 +43,8 @@ class EmbedAuthor extends React.Component {
         key="url"
         type="text"
         placeholder="Name URL:"
-        value={this.state.url}
-        onChange={(ev)=>this.setState({url: ev.target.value})}
+        value={this.props.url}
+        onChange={(ev)=>this.props.onUpdate({url: ev.target.value})}
       /> :
       <button onClick={()=>this.setState({isUrlEdited: true})}>
         Add URL
@@ -63,16 +56,16 @@ class EmbedAuthor extends React.Component {
       placeholder="Name:"
       key="name"
       type="text"
-      value={this.state.name}
-      onChange={(ev)=>this.setState({name: ev.target.value})}
+      value={this.props.name}
+      onChange={(ev)=>this.props.onUpdate({name: ev.target.value})}
     />;
   }
   
   renderLink(){
   return <Link 
-    href={this.state.url} 
+    href={this.props.url} 
     className="embed-author-name edit-button-modal-wrapper">
-    {this.state.name}
+    {this.props.name}
     <div className="edit-button-modal">
       <button onClick={(e)=>{
         e.preventDefault()
@@ -88,7 +81,7 @@ class EmbedAuthor extends React.Component {
     return <span 
       className="embed-author-name" 
       onClick={()=>this.setState({isEdited: true})}>
-      {this.state.name}
+      {this.props.name}
     </span>;
   }
 
@@ -98,7 +91,7 @@ class EmbedAuthor extends React.Component {
       {this.renderNamePrompt()}
       {this.renderUrlPrompt()}
     </span> :
-    (this.state.url.length>0) ?
+    (this.props.url.length>0) ?
     this.renderLink() :
     this.renderName()
   }

@@ -2,7 +2,9 @@ import { connect } from 'react-redux'
 import { setImage } from 'constants/actions'
 import EmbedImage from './image'
 
-const mapStateToProps = (state) => {}
+const mapStateToProps = (state) => {
+  return {url: state.image}
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
