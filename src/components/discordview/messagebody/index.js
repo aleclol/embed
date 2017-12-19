@@ -4,7 +4,6 @@ import { parse, jumboify } from 'lib/markdown'
 import MessageBody from './messagebody'
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     parsedContent: parse(state.messageBody, true, {}, jumboify)
   }

@@ -1,13 +1,39 @@
 import React from 'react';
-import {parseAllowLinks} from 'lib/markdown'
+import onClickOutside from "react-onclickoutside";
 
-const EmbedDescription = ({ content }) => {
-  let placeholder =  'this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```'
-    if (!content) {
-      return null;
+class EmbedDescription extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isEdited: true,
+      content: ''
     }
-  
-    return <div className="embed-description markup">{parseAllowLinks(content)}</div>;
-  };
+  }
 
-export default EmbedDescription
+  handleClickOutside = ev => {
+    if (this.state.isEdited && this.state.content.length>0){
+      let {content} = this.state
+      this.props.onChangeContent(content)
+      this.setState({isEdited: false})
+    }
+  }
+
+  renderDescriptionPrompt(){
+    return <textarea 
+    value={this.state.content} 
+    onChange={(ev)=>this.setState({content: ev.target.value})}
+    placeholder="Description, markdown accepted">
+      {this.state.content}
+    </textarea>
+  }
+
+  render(){
+    return <div 
+    className="embed-description markup" 
+    onClick={()=>this.setState({isEdited: false})}>
+    {this.state.isEdited?this.renderDescriptionPrompt():this.props.parsedContent}
+    </div>;
+  };
+}
+
+export default onClickOutside(EmbedDescription)
