@@ -7,6 +7,7 @@ import image from './image'
 import thumbnail from './thumbnail'
 import color from './color'
 import footer from './footer'
+import fields from './fields'
 
 const visualApp = combineReducers({
   messageBody,
@@ -16,7 +17,8 @@ const visualApp = combineReducers({
   image,
   thumbnail,
   color,
-  footer
+  footer,
+  fields
   })
 
 export default visualApp
