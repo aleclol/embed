@@ -12,8 +12,8 @@ const EmbedFields = (props)=> {
       {...f} />
     )}
     <button
-    onClick={props.onAddField()}>
-      Add
+    onClick={()=>props.onAddField()}>
+      Add field
     </button>
   </div> 
 }

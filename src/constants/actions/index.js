@@ -68,11 +68,11 @@ export const setFooter = footer => {
   }
 }
 
-export const setField = (field, index) => {
+export const setField = (index, field) => {
   return {
-    type: SET_FIELD, 
-    field,
-    index
+    type: SET_FIELD,
+    index, 
+    field
   }
 }
 

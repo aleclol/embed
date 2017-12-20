@@ -6,9 +6,10 @@ import EmbedFields from './fields'
 
 const mapStateToProps = (state) => {
   return {
-    fields: state.fields.map((field)=>{
+    fields: state.fields.map((field, index)=>{
       return {
         ...field,
+        index,
         parsedName: parseEmbedTitle(field.name),
         parsedValue:parseAllowLinks(field.value)
       }
@@ -18,8 +19,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onUpdateField: (field, index) => {
-      dispatch(setField(field, index))
+    onUpdateField: (index, field) => {
+      dispatch(setField(index, field))
     },
     onAddField: () => {
       dispatch(addField())

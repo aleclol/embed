@@ -24,7 +24,7 @@ class EmbedField extends React.Component {
       key="name"
       placeholder="Name:"
       value={this.props.name}
-      onChange={this.props.onUpdate({name: this.props.name, key: this.props.key})}/> : 
+      onChange={(ev) => this.props.onUpdate( this.props.index, {name: ev.target.value})}/> : 
       this.props.parsedName}
     </div>
   }
@@ -37,7 +37,7 @@ class EmbedField extends React.Component {
       key="value"
       placeholder="Value:"
       value={this.props.value}
-      onChange={this.props.onUpdate({value: this.props.value, key: this.props.key})}/> : 
+      onChange={(ev)=> this.props.onUpdate(this.props.index, {value: ev.target.value})}/> : 
       this.props.parsedValue}
     </div>
   }
@@ -46,20 +46,22 @@ class EmbedField extends React.Component {
     const cls = 'embed-field' + (this.props.inline ? ' embed-field-inline' : '');
   
     return <div 
-    className={cls}
-    onClick={this.setState({isEdited: true})}>
-    {this.renderFieldName()}
-    {this.renderFieldValue()}
-    <button 
-      onClick={this.props.onUpdate({inline: !this.props.inline, key: this.props.key})}>
-      Inline?
-    </button>
-    <button 
-      onClick={this.props.onRemove(this.props.key)}>
-      Remove
-    </button>
-    </div>;
-  };
+    className={cls}>
+      <div
+      onClick={()=>this.setState({isEdited: true})}>
+        {this.renderFieldName()}
+        {this.renderFieldValue()}
+      </div>
+      <button 
+        onClick={()=>this.props.onUpdate(this.props.index, {inline: !this.props.inline})}>
+        Inline?
+      </button>
+      <button 
+        onClick={()=>this.props.onRemove(this.props.key)}>
+        Remove
+      </button>
+    </div>
+  }
 }
 
 export default onClickOutside(EmbedField)
