@@ -60,7 +60,7 @@ const CodeMirror = React.createClass({
     };
   },
 
-  validateInput(input, webhookMode) {
+  validateInput(input, webhookMode=false) {
     let parsed, parseError, isValid, validationError;
     const validator = webhookMode ? validators.webhook : validators.regular;
 
@@ -70,11 +70,6 @@ const CodeMirror = React.createClass({
       validationError = stringifyErrors(parsed, validator.errors);
     } catch (e) {
       parseError = e.message;
-    }
-
-    let data = this.state.data;
-    if (isValid) {
-      data = parsed;
     }
 
     let error = '';
@@ -88,7 +83,7 @@ const CodeMirror = React.createClass({
     // maybe it's okay (and if we ever want to
     // debounce validation, we need to take some of these out)
     // but for now that's what we do.
-    this.setState({ input, data, error, webhookMode });
+    return {isValid, parsed, error}
   },
 
   componentDidMount() {
@@ -132,8 +127,11 @@ const CodeMirror = React.createClass({
   },
 
   valueChanged(instance, change) {
-    if (this.props.onChange && change.origin !== 'setValue') {
-      this.props.onChange(this.instance.getValue(), change);
+    const currentValue = this.instance.getValue()
+    const {isValid, parsed, error} = this.validateInput(currentValue)
+    this.props.updateError(error)
+    if (this.props.onChange && change.origin !== 'setValue' && isValid) {
+      this.props.onChange(parsed, change);
     }
   },
 

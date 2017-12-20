@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import visualApp from 'constants/reducers'
 import Button from 'components/common/button';
-import CodeMirror from 'components/codemirror/codemirror';
+import CodeMirrorContainer from 'components/codemirror';
 import DiscordView from 'components/discordview/discordview';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
@@ -63,6 +63,10 @@ const App = React.createClass({
     this.setState({ viewCommand: e.target.value });
   },
 
+  updateError(err) {
+    this.setState({error: err})
+  },
+
   render() {
     const webhookModeLabel = `${this.state.webhookMode ? 'Dis' : 'En'}able webhook mode`;
     const themeLabel = `${this.state.darkTheme ? 'Light' : 'Dark'} theme`;
@@ -109,8 +113,9 @@ const App = React.createClass({
                   <button className="cmd-btn cmd-action">Copy 🔗</button>
                 </CopyToClipboard>
               </div>
-              <CodeMirror
+              <CodeMirrorContainer
                 theme={'one-dark'}
+                updateError={this.updateError}
               />
             </div>
           </section>
