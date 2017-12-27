@@ -21,7 +21,7 @@ const integerToColor = (number) => {
   return '#' + ('00000' + (number | 0).toString(16)).substr(-6);
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     value: JSON.stringify({
       content: state.messageBody,
@@ -49,17 +49,40 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChange: (lump, change) => {
-      console.log(lump)
-      dispatch(setMessageBody(lump.content)), 
-      dispatch(setAuthor(lump.embed.author)), 
-      dispatch(setDescription(lump.embed.description)), 
-      dispatch(setTitle({title: lump.embed.title, url: lump.embed.url})),
-      dispatch(setFooter({text: lump.embed.footer.text, iconUrl: lump.embed.footer.icon_url})), 
-      dispatch(setColor(integerToColor(lump.embed.color))),
-      dispatch(setImage(lump.embed.image.url)),
-      dispatch(setThumbnail(lump.embed.thumbnail.url)),
-      lump.embed.fields.map((f,i) => {
+    onChange: (fromJSON, change) => {
+      const defaultObject = {
+        content: '',
+        embed: {
+          title: '',
+          url: '',
+          description: '',
+          author: {
+            name: '',
+            url: '',
+            icon_url: '',          
+          },
+          color: 0,
+          footer: {
+            text: '',
+            icon_url: ''
+          },
+          thumbnail: { url: '' },
+          image: { url: '' },
+          fields: []
+        }
+      }
+
+      const lump = {...defaultObject, ...fromJSON} 
+
+      dispatch(setMessageBody(lump.content)) 
+      dispatch(setAuthor(lump.embed.author)) 
+      dispatch(setDescription(lump.embed.description)) 
+      dispatch(setTitle({title: lump.embed.title, url: lump.embed.url}))
+      dispatch(setFooter({text: lump.embed.footer.text, iconUrl: lump.embed.footer.icon_url})) 
+      dispatch(setColor(integerToColor(lump.embed.color)))
+      dispatch(setImage(lump.embed.image.url))
+      dispatch(setThumbnail(lump.embed.thumbnail.url))
+      lump.embed.fields.forEach((f,i) => {
         dispatch(addField())
         dispatch(setField(i, f))
       })

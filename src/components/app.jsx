@@ -5,10 +5,8 @@ import { createStore } from 'redux'
 import visualApp from 'constants/reducers'
 import Button from 'components/common/button';
 import CodeMirrorContainer from 'components/codemirror';
+import ClipboardContainer from 'components/clipboard';
 import DiscordView from 'components/discordview/discordview';
-import CopyToClipboard from 'react-copy-to-clipboard';
-
-
 
 let store = createStore(visualApp)
 
@@ -25,8 +23,6 @@ const App = React.createClass({
       compactMode: false,
       darkTheme: true,
       error: null,
-      viewType: 0,
-      viewCommand: "Name"
     };
   },
 
@@ -55,14 +51,6 @@ const App = React.createClass({
     this.setState({ compactMode: !this.state.compactMode });
   },
 
-  setViewType(n) {
-    this.setState({ viewType: n });
-  },
-
-  setViewCommand(e) {
-    this.setState({ viewCommand: e.target.value });
-  },
-
   updateError(err) {
     this.setState({error: err})
   },
@@ -71,16 +59,7 @@ const App = React.createClass({
     const webhookModeLabel = `${this.state.webhookMode ? 'Dis' : 'En'}able webhook mode`;
     const themeLabel = `${this.state.darkTheme ? 'Light' : 'Dark'} theme`;
     const compactModeLabel = `${this.state.compactMode ? 'Cozy' : 'Compact'} mode`;
-    const typeTabClasses = "type-tab align-middle open-sans";
 
-    var prefix = "";
-    const vc = this.state.viewCommand;
-    if (this.state.viewType == 1)
-      prefix = ".acr \"" + vc + "\" ";
-    else if (this.state.viewType == 2)
-      prefix = ".. \"" + vc + "\" ";
-
-    //const input = prefix + this.state.input;
     return (
       <Provider store={store}>
       <main className="vh-100-l bg-blurple open-sans ">
@@ -96,23 +75,7 @@ const App = React.createClass({
               />
             </div>
             <div className="vh-100 h-auto-l w-100 w-50-l pa4 pl3-l pb0">
-              <div className="tabs align-middle">
-                <div className={typeTabClasses + (this.state.viewType == 0 ? " selected" : "")} onClick={() => this.setViewType(0)}>None</div>
-                <div className={typeTabClasses + (this.state.viewType == 1 ? " selected" : "")} onClick={() => this.setViewType(1)}>Custom Reaction</div>
-                <div className={typeTabClasses + (this.state.viewType == 2 ? " selected" : "")} onClick={() => this.setViewType(2)}>Quote</div>
-              </div>
-              <div className="cmd-name">
-                <input
-                  onFocus={(e) => e.target.select()}
-                  className="cmd-action input"
-                  hidden={this.state.viewType == 0}
-                  defaultValue={this.state.viewCommand}
-                  type="text" placeholder="Name"
-                  onChange={(e) => this.setViewCommand(e)} />
-                <CopyToClipboard>
-                  <button className="cmd-btn cmd-action">Copy 🔗</button>
-                </CopyToClipboard>
-              </div>
+              <ClipboardContainer/>
               <CodeMirrorContainer
                 theme={'one-dark'}
                 updateError={this.updateError}
