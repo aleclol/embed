@@ -106,23 +106,17 @@ const DiscordView = React.createClass({
                   />
                 </div>
                 <div className="accessory">
-                  <div className="embed-wrapper">
-                    <ColorpillContainer/>
-                    <div className="embed embed-rich">
-                      <div className="embed-content">
-                        <div className="embed-content-inner">
-                          <AuthorContainer/>
-                          <TitleContainer/>
-                          <DescriptionContainer/>
-                          <FieldsContainer/>
-                        </div>
-                        <ThumbnailContainer/>
-                      </div>
-                      <ImageContainer/>
-                      <FooterContainer/>
-                      </div>
-                    </div>
+                  <ColorpillContainer/>
+                  <div className="embed embed-rich">
+                    <AuthorContainer/>
+                    <TitleContainer/>
+                    <DescriptionContainer/>
+                    <FieldsContainer/>
+                    <ImageContainer/>
+                    <FooterContainer/>
                   </div>
+                  <ThumbnailContainer/>
+                </div>
               </div>
             </div>
           </div>

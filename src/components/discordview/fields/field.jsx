@@ -21,6 +21,7 @@ class EmbedField extends React.Component {
     className="embed-field-name">
     {this.state.isEdited ?
       <input
+      type="text" 
       key="name"
       placeholder="Name:"
       value={this.props.name}
@@ -34,6 +35,7 @@ class EmbedField extends React.Component {
     className="embed-field-value markup">
     {this.state.isEdited ?
       <input
+      type="text" 
       key="value"
       placeholder="Value:"
       value={this.props.value}

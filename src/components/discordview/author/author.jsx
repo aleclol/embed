@@ -97,7 +97,15 @@ class EmbedAuthor extends React.Component {
   }
 
   render(){
-    return <div className="embed-author">{this.renderIcon()}{this.renderNameSpan()}</div>;
+    return <div 
+      className="embed-author">
+      <div className="embed-author-input">
+        {this.renderIcon()}
+      </div>
+      <div className="embed-author-input">
+        {this.renderNameSpan()}
+      </div>
+    </div>;
   }  
 }
 

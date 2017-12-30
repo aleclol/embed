@@ -16,30 +16,34 @@ class EmbedImage extends React.Component {
   }
 
   render(){
-    return this.state.isEdited ? 
-    <input 
-      placeholder="Image URL:"
-      type="text"
-      value={this.props.url}
-      onChange={(ev)=>this.props.onUpdate(ev.target.value)}/> :
-    <a
-    className="embed-thumbnail embed-thumbnail-rich edit-button-modal-wrapper">
-      <img
-        alt="X"
-        src={this.props.url} 
-        role="presentation" 
-        className="image"
-        style={{ maxWidth: 80, maxHeight: 80 }}/>
-      <div className="edit-button-modal">
-        <button onClick={(e)=>{
-          e.preventDefault()
-          this.setState({isEdited: true})
-        }}>
-          Edit
-        </button>
-      </div>
-    </a>;
-  };
+    return <div 
+    className="embed-image">
+    {this.state.isEdited ? 
+      <input 
+        placeholder="Image URL:"
+        type="text"
+        value={this.props.url}
+        onChange={(ev)=>this.props.onUpdate(ev.target.value)}/> :
+      <a
+      className="embed-thumbnail embed-thumbnail-rich edit-button-modal-wrapper">
+        <img
+          alt="X"
+          src={this.props.url} 
+          role="presentation" 
+          className="image"
+          style={{ maxWidth: 80, maxHeight: 80 }}/>
+        <div className="edit-button-modal">
+          <button onClick={(e)=>{
+            e.preventDefault()
+            this.setState({isEdited: true})
+          }}>
+            Edit
+          </button>
+        </div>
+      </a>
+    }
+    </div>
+  }  
 }
 
 export default onClickOutside(EmbedImage)

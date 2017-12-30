@@ -11,10 +11,12 @@ const EmbedFields = (props)=> {
       onRemove={props.onRemoveField} 
       {...f} />
     )}
-    <button
-    onClick={()=>props.onAddField()}>
-      Add field
-    </button>
+    <div className="embed-field embed-field-inline">
+      <button
+      onClick={()=>props.onAddField()}>
+        Add field
+      </button>
+    </div>
   </div> 
 }
 

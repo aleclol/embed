@@ -82,8 +82,6 @@ const App = React.createClass({
               />
             </div>
           </section>
-
-
           <footer className="w-100 pa3 tc white">
           </footer>
         </div>

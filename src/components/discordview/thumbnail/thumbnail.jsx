@@ -16,20 +16,23 @@ class EmbedThumbnail extends React.Component {
   }
 
   render(){
-    return this.state.isEdited ? 
-    <input 
-      placeholder="Thumbnail URL:"
-      type="text"
-      value={this.props.url}
-      onChange={(ev)=>this.props.onUpdate(ev.target.value)}/> :
-    <img
-      alt="X"
-      src={this.props.url} 
-      role="presentation" 
-      className="embed-rich-thumb"
-      style={{ maxWidth: 80, maxHeight: 80 }}
-      onClick={()=>this.setState({isEdited: true})}/>;
-  };
+    return <div 
+      className="embed-thumb"> 
+      {this.state.isEdited ? 
+      <input 
+        placeholder="Thumbnail URL:"
+        type="text"
+        value={this.props.url}
+        onChange={(ev)=>this.props.onUpdate(ev.target.value)}/> :
+      <img
+        alt="X"
+        src={this.props.url} 
+        role="presentation" 
+        className="embed-rich-thumb"
+        style={{ maxWidth: 80, maxHeight: 80 }}
+      onClick={()=>this.setState({isEdited: true})}/>}
+    </div>
+  }
 }
 
 export default onClickOutside(EmbedThumbnail)

@@ -53,7 +53,8 @@ class EmbedFooter extends React.Component {
     time = time.isValid() ? time.format('ddd MMM Do, YYYY [at] h:mm A') : null;
     const footerText = [this.props.text, time].filter(Boolean).join(' | ');
   
-    return <div>
+    return <div 
+      className="embed-footer-wrapper">
       {this.renderIcon()}
       <span 
       className="embed-footer"
@@ -62,7 +63,7 @@ class EmbedFooter extends React.Component {
         this.renderTextPrompt() :
         footerText} 
       </span>
-    </div>;
+    </div>
   };
 }
 export default onClickOutside(EmbedFooter)
