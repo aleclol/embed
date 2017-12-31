@@ -9,7 +9,8 @@ import {
   setImage,
   setThumbnail,
   addField,
-  setField
+  setField,
+  removeAllFields
 } from 'constants/actions'
 import CodeMirror from './codemirror'
 
@@ -24,25 +25,23 @@ const integerToColor = (number) => {
 export const mapStateToProps = (state) => {
   return {
     value: JSON.stringify({
-      content: state.messageBody,
-      embed: {
-        title: state.title.title,
-        url: state.title.url,
-        description: state.description,
-        author: {
-          name: state.author.name,
-          url: state.author.url,
-          icon_url: state.author.iconUrl,          
-        },
-        color: colorToInteger(state.color),
-        footer: {
-          text: state.footer.text,
-          icon_url: state.footer.iconUrl
-        },
-        thumbnail: { url: state.thumbnail },
-        image: { url: state.image },
-        fields: state.fields
-      }
+      plainText: state.messageBody,
+      title: state.title.title,
+      url: state.title.url,
+      description: state.description,
+      author: {
+        name: state.author.name,
+        url: state.author.url,
+        icon_url: state.author.iconUrl,          
+      },
+      color: colorToInteger(state.color),
+      footer: {
+        text: state.footer.text,
+        icon_url: state.footer.iconUrl
+      },
+      thumbnail: { url: state.thumbnail },
+      image: { url: state.image },
+      fields: state.fields
     }, null, '  ')
   }
 }
@@ -51,38 +50,37 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (fromJSON, change) => {
       const defaultObject = {
-        content: '',
-        embed: {
-          title: '',
+        plainText: '',
+        title: '',
+        url: '',
+        description: '',
+        author: {
+          name: '',
           url: '',
-          description: '',
-          author: {
-            name: '',
-            url: '',
-            icon_url: '',          
-          },
-          color: 0,
-          footer: {
-            text: '',
-            icon_url: ''
-          },
-          thumbnail: { url: '' },
-          image: { url: '' },
-          fields: []
-        }
+          icon_url: '',          
+        },
+        color: 0,
+        footer: {
+          text: '',
+          icon_url: ''
+        },
+        thumbnail: { url: '' },
+        image: { url: '' },
+        fields: []
       }
 
       const lump = {...defaultObject, ...fromJSON} 
 
-      dispatch(setMessageBody(lump.content)) 
-      dispatch(setAuthor(lump.embed.author)) 
-      dispatch(setDescription(lump.embed.description)) 
-      dispatch(setTitle({title: lump.embed.title, url: lump.embed.url}))
-      dispatch(setFooter({text: lump.embed.footer.text, iconUrl: lump.embed.footer.icon_url})) 
-      dispatch(setColor(integerToColor(lump.embed.color)))
-      dispatch(setImage(lump.embed.image.url))
-      dispatch(setThumbnail(lump.embed.thumbnail.url))
-      lump.embed.fields.forEach((f,i) => {
+      dispatch(setMessageBody(lump.plainText)) 
+      dispatch(setAuthor(lump.author)) 
+      dispatch(setDescription(lump.description)) 
+      dispatch(setTitle({title: lump.title, url: lump.url}))
+      dispatch(setFooter({text: lump.footer.text, iconUrl: lump.footer.icon_url})) 
+      dispatch(setColor(integerToColor(lump.color)))
+      dispatch(setImage(lump.image.url))
+      dispatch(setThumbnail(lump.thumbnail.url))
+      dispatch(removeAllFields())
+      lump.fields.forEach((f,i) => {
         dispatch(addField())
         dispatch(setField(i, f))
       })

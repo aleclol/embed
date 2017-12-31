@@ -1,4 +1,4 @@
-import { ADD_FIELD, REMOVE_FIELD, SET_FIELD } from 'constants/types';
+import { ADD_FIELD, REMOVE_FIELD, SET_FIELD, REMOVE_ALL_FIELDS } from 'constants/types';
 import {field, fieldInitState} from './field'
 
 const fields = (state = [], action) => {
@@ -13,6 +13,8 @@ const fields = (state = [], action) => {
           let newState = [...state]
           newState.splice(action.index, 1)
           return newState
+        case REMOVE_ALL_FIELDS:
+          return []
         case SET_FIELD:
           return [
             ...state.slice(0, action.index),

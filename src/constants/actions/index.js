@@ -9,7 +9,8 @@ import {
   SET_FOOTER,
   SET_FIELD,
   ADD_FIELD,
-  REMOVE_FIELD
+  REMOVE_FIELD,
+  REMOVE_ALL_FIELDS
 } from 'constants/types';
 
 export const setMessageBody = messageBody => {
@@ -86,5 +87,11 @@ export const removeField = index => {
   return {
     type: REMOVE_FIELD, 
     index
+  }
+}
+
+export const removeAllFields = () => {
+  return {
+    type: REMOVE_ALL_FIELDS
   }
 }
