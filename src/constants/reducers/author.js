@@ -3,7 +3,7 @@ import { SET_AUTHOR } from 'constants/types';
 const initState = {
     name: '',
     url: '',
-    iconUrl: ''
+    icon_url: ''
 }
 
 const author = (state = initState, action) => {

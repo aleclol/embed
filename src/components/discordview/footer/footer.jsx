@@ -15,7 +15,7 @@ class EmbedFooter extends React.Component {
     if (this.state.isEdited && this.props.text.length>0){
       this.setState({isEdited: false})
     }
-    if (this.state.isIconUrlEdited && this.props.iconUrl.length>0){
+    if (this.state.isIconUrlEdited && this.props.icon_url.length>0){
       this.setState({isIconUrlEdited: false})
     }
   }
@@ -25,11 +25,11 @@ class EmbedFooter extends React.Component {
     <input 
       placeholder="Footer icon URL:"
       type="text"
-      value={this.props.iconUrl}
-      onChange={(ev)=>this.props.onUpdate({iconUrl: ev.target.value})}/> :
+      value={this.props.icon_url}
+      onChange={(ev)=>this.props.onUpdate({icon_url: ev.target.value})}/> :
     <img
       alt="X"
-      src={this.props.iconUrl} 
+      src={this.props.icon_url} 
       role="presentation" 
       className="embed-footer-icon" 
       width="20"

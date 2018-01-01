@@ -2,7 +2,7 @@ import { SET_FOOTER } from 'constants/types';
 
 const initState = {
     text: '',
-    iconUrl: ''
+    icon_url: ''
 }
 
 const footer = (state = initState, action) => {

@@ -16,7 +16,7 @@ class EmbedAuthor extends React.Component {
       if (this.state.isEdited && this.props.name.length>0){
         this.setState({isUrlEdited: false, isEdited: false})
       }
-      if (this.state.isIconUrlEdited && this.props.iconUrl.length>0){
+      if (this.state.isIconUrlEdited && this.props.icon_url.length>0){
         this.setState({isIconUrlEdited: false})
       }
   }
@@ -27,11 +27,11 @@ class EmbedAuthor extends React.Component {
       placeholder="Icon URL:"
       type="text"
       key="icon-url"
-      value={this.props.iconUrl}
-      onChange={(ev)=>this.props.onUpdate({iconUrl: ev.target.value})}/> :
+      value={this.props.icon_url}
+      onChange={(ev)=>this.props.onUpdate({icon_url: ev.target.value})}/> :
     <img
       alt="X"
-      src={this.props.iconUrl} 
+      src={this.props.icon_url} 
       role="presentation" 
       className="embed-author-icon"
       onClick={()=>this.setState({isIconUrlEdited: true})}/>;
