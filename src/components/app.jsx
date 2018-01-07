@@ -62,7 +62,7 @@ const App = React.createClass({
 
     return (
       <Provider store={store}>
-      <main className="vh-100-l bg-blurple open-sans ">
+      <main className="vh-100-l bg-blurple whitney ">
 
         <div className="h-100 flex flex-column">
           <section className="flex-l flex-auto">

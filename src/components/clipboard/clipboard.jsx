@@ -11,7 +11,7 @@ class Clipboard extends React.Component {
   }
 
   render(){
-    const typeTabClasses = "type-tab align-middle open-sans";
+    const typeTabClasses = "type-tab align-middle whitney";
 
     let prefix = "";
     const vc = this.state.viewCommand;
@@ -47,7 +47,7 @@ class Clipboard extends React.Component {
             type="text" placeholder="Name"
             onChange={(e) => this.setState({viewCommand: e.target.value})} />
           <CopyToClipboard text={prefix+this.props.value}>
-            <button className="cmd-btn cmd-action">Copy 🔗</button>
+            <button className="cmd-btn cmd-action whitney">Copy 🔗</button>
           </CopyToClipboard>
         </div>
       </div>

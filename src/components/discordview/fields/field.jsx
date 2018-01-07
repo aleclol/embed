@@ -54,14 +54,16 @@ class EmbedField extends React.Component {
         {this.renderFieldName()}
         {this.renderFieldValue()}
       </div>
-      <button 
-        onClick={()=>this.props.onUpdate(this.props.index, {inline: !this.props.inline})}>
-        Inline?
-      </button>
-      <button 
-        onClick={()=>this.props.onRemove(this.props.key)}>
-        Remove
-      </button>
+      <div className='buttons'>
+        <button 
+          onClick={()=>this.props.onUpdate(this.props.index, {inline: !this.props.inline})}>
+          Inline?
+        </button>
+        <button 
+          onClick={()=>this.props.onRemove(this.props.key)}>
+          Remove
+        </button>
+      </div>
     </div>
   }
 }

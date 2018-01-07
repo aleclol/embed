@@ -112,6 +112,9 @@
 
 /* -- codemirror -- */
 
+.code-mirror-wrap {
+  height: calc(100% - 94px);
+}
 .CodeMirror {
   height: 100%;
   border-radius: 0;
@@ -121,6 +124,9 @@
   font-size: 14px;
 }
 
+.CodeMirror {
+  border-radius: 5px;
+}
 /* -- codemirror -- */
 
 /* -- highlight.js -- */
@@ -304,6 +310,7 @@ Original One Light Syntax theme from https://github.com/atom/one-light-syntax
   margin: 0 auto;
   font-size: 20px;
   background: #424549;
+  line-height: 0;
 }
 .type-tab {
   margin: 0px auto;
@@ -313,7 +320,7 @@ Original One Light Syntax theme from https://github.com/atom/one-light-syntax
   color: white;
   cursor: pointer;
   width:33.33%;
-  padding: 10px 0px 5px 0px;
+  padding: 20px 0;
 }
 .type-tab.selected {
   background: #282b30;
