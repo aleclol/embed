@@ -20,7 +20,7 @@ const convertLineEndings = (str) => {
 const CodeMirror = React.createClass({
   getDefaultProps() {
     return {
-      className: 'w-100 h-100',
+      className: 'w-100 code-mirror-wrap',
       options: {
         mode: { name: 'javascript', json: true },
         autoCloseBrackets: true,

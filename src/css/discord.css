@@ -502,6 +502,7 @@
 
 .message-group h2 {
   margin: 0;
+  margin-bottom: 10px;
   padding: 0
 }
 
@@ -549,8 +550,12 @@
   font-size: 15px;
   line-height: 1.1em;
   white-space: pre-wrap;
-  margin-top: 6px;
+  /* margin-top: 6px; */
   word-wrap: break-word
+}
+
+.message-group .comment .markup {
+  /* margin: 10px 0; */
 }
 
 .message-group .comment .markup strong {
@@ -753,6 +758,7 @@
   display: flex;
   display: -webkit-box;
   display: -ms-flexbox;
+  margin-right: 10px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -829,7 +835,11 @@
   -ms-flex-align: center;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 5px
+  margin-bottom: 5px;
+}
+
+.embed .embed-author {
+  align-items: flex-start;
 }
 
 .embed .embed-author-name,
@@ -846,7 +856,7 @@
 }
 
 .embed .embed-author-icon {
-  margin-right: 9px;
+  /* margin-right: 9px; */
   width: 20px;
   height: 20px;
   -o-object-fit: contain;
@@ -919,7 +929,11 @@
   padding-top: 10px;
   min-width: 100%;
   max-width: 506px;
-  margin-right: 5px;
+  margin-right: 10px;
+}
+
+.embed .embed-fields .embed-field .add-button {
+  margin-right: 0;
 }
 
 .embed .embed-fields .embed-field.embed-field-inline {
@@ -933,7 +947,7 @@
 
 .embed .embed-fields .embed-field .embed-field-name {
   font-size: 14px;
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */
   font-weight: 600
 }
 
@@ -1077,7 +1091,18 @@
 
 .discord-view button {
   border: 0;
-  cursor: pointer
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.discord-view button {
+  background-color: #282B30;
+  border: 1px solid #282B30;
+  border-radius: 5px;
+  color: rgba(130, 148, 150, 0.7);
+  font-size: 1rem;
+  padding: 13px 0;
+  width: 100%;
 }
 
 .discord-view button:focus {
@@ -1105,7 +1130,11 @@
 .edit-button-modal{
   position: absolute;
   top: 100%;
-  background: gray;
+}
+
+.edit-button-modal button {
+  margin-top: 5px;
+  padding: 5px 12px;
 }
 
 input[type="text"], textarea {
@@ -1115,6 +1144,20 @@ input[type="text"], textarea {
   margin-right: 5px;
   margin-bottom: 5px;
   width: 100%;
+}
+
+input[type="text"], textarea { /*added*/
+  background-color: #2E3136;
+  border: 1px solid #282B30;
+  border-radius: 5px;
+  color: rgba(130, 148, 150, 1);
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+  padding: 13px 8px;
+}
+
+input[type="text"]::placeholder, textarea::placeholder {
+  color: rgba(130, 148, 150, 0.7);
 }
 
 button {
@@ -1131,14 +1174,15 @@ textarea {
 }
 
 .embed-author-input {
-  margin-right: 5px;
-  width: 100%;
+  margin-right: 9px;
+  /* width: 49%; */
 }
 
 .embed-author-input span {
   width: 100%;
 }
 
-.embed-footer {
-  width: 100%;
+.clipboard {
+  display: flex;
+  flex-direction: column;
 }

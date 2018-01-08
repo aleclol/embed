@@ -62,7 +62,7 @@ const App = React.createClass({
 
     return (
       <Provider store={store}>
-      <main className="vh-100-l bg-blurple open-sans ">
+      <main className="vh-100-l bg-blurple whitney ">
 
         <div className="h-100 flex flex-column">
           <section className="flex-l flex-auto">
@@ -74,7 +74,7 @@ const App = React.createClass({
                 compactMode={this.state.compactMode}
               />
             </div>
-            <div className="vh-100 h-auto-l w-100 w-50-l pa4 pl3-l pb0">
+            <div className="clipboard w-100 w-50-l pa4 pl3-l pb0">
               <ClipboardContainer/>
               <CodeMirrorContainer
                 theme={'one-dark'}
