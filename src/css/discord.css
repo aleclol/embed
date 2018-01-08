@@ -782,6 +782,18 @@
   color: #4f545c
 }
 
+.embed-fields .buttons * {
+  margin-right: 5px;
+}
+.embed-fields .buttons button {
+  padding: 5px 12px;
+  width: auto;
+}
+.embed-fields input {
+  position: relative;
+  top: 1px;
+}
+
 .embed.embed-rich {
   position: relative;
   display: flex;
