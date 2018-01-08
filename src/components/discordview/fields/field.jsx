@@ -55,11 +55,12 @@ class EmbedField extends React.Component {
         {this.renderFieldValue()}
       </div>
       <div className='buttons'>
-        Inline <input
+        <input
           type="checkbox"
           defaultChecked={true}
           onClick={(ev)=>this.props.onUpdate(this.props.index, {inline: ev.target.checked})}>
         </input>
+        <span>Inline</span>
         <button 
           onClick={()=>this.props.onRemove(this.props.key)}>
           Remove
