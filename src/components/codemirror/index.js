@@ -34,9 +34,14 @@ const filterState = (state) => {
       for (var prop in value) {
         if (notEmptyString(value[prop])) {
           if (!(key in editorState)) editorState[key] = {}
+          console.log(key, prop)
           editorState[key][prop] = value[prop]
         }
       }
+    }
+    else if (typeof value === "number")
+    {
+      editorState[key] = value;
     }
   })
 

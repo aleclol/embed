@@ -1,11 +1,12 @@
 import React from 'react';
 import onClickOutside from "react-onclickoutside";
+import CondText from "components/common/condText"
 
 class EmbedDescription extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      isEdited: true,
+      isEdited: false,
     }
   }
 
@@ -28,9 +29,9 @@ class EmbedDescription extends React.Component {
     return <div 
     className="embed-description markup" 
     onClick={()=>this.setState({isEdited: true})}>
-      {this.state.isEdited ?
-      this.renderDescriptionPrompt() : 
-      this.props.parsedContent}
+      <CondText condition={this.state.isEdited}
+        yes={this.renderDescriptionPrompt()}
+        no={this.props.parsedContent} />
     </div>;
   };
 }
