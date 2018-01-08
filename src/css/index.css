@@ -321,6 +321,9 @@ Original One Light Syntax theme from https://github.com/atom/one-light-syntax
   cursor: pointer;
   width:33.33%;
   padding: 20px 0;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .type-tab.selected {
   background: #282b30;
