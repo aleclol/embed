@@ -74,7 +74,7 @@ const App = React.createClass({
                 compactMode={this.state.compactMode}
               />
             </div>
-            <div className="vh-100 h-auto-l w-100 w-50-l pa4 pl3-l pb0">
+            <div className="clipboard w-100 w-50-l pa4 pl3-l pb0">
               <ClipboardContainer/>
               <CodeMirrorContainer
                 theme={'one-dark'}

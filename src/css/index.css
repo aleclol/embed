@@ -113,7 +113,7 @@
 /* -- codemirror -- */
 
 .code-mirror-wrap {
-  height: calc(100% - 94px);
+  height: 100%;
 }
 .CodeMirror {
   height: 100%;
@@ -349,12 +349,13 @@ Original One Light Syntax theme from https://github.com/atom/one-light-syntax
 .cmd-btn {
   vertical-align: middle;
   font-size: 13px;
-  padding: 5px;
+  padding: 5px 12px;
   border: 1px solid #8f8f8f;
   margin-left: 10px;
   color: #ccc;
   background: #424549;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .cmd-btn:active{
