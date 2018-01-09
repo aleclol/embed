@@ -40,28 +40,8 @@ const embedSchema = {
         "proxy_icon_url": {}
       }
     },
-    "image": {
-      "type": "object",
-      "additionalProperties": false,
-      "disallowed": ["proxy_url", "width", "height"],
-      "properties": {
-        "url": { "type": "string" },
-        "proxy_url": {},
-        "width": {},
-        "height": {}
-      }
-    },
-    "thumbnail": {
-      "type": "object",
-      "additionalProperties": false,
-      "disallowed": ["proxy_url", "width", "height"],
-      "properties": {
-        "url": { "type": "string" },
-        "proxy_url": {},
-        "width": {},
-        "height": {}
-      }
-    },
+    "image": { "type": "string" },
+    "thumbnail": { "type": "string" },
     "author": {
       "type": "object",
       "additionalProperties": false,

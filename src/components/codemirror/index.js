@@ -57,8 +57,8 @@ const mapState = (state) => {
     author: {...state.author},
     color: colorToInteger(state.color),
     footer: {...state.footer},
-    thumbnail: { url: state.thumbnail },
-    image: { url: state.image },
+    thumbnail: state.thumbnail,
+    image: state.image,
     fields: state.fields
   }
 
@@ -90,8 +90,8 @@ const mapDispatchToProps = (dispatch) => {
           text: '',
           icon_url: ''
         },
-        thumbnail: { url: '' },
-        image: { url: '' },
+        thumbnail: '',
+        image: '',
         fields: []
       }
 
@@ -108,8 +108,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setTitle({title: lump.title, url: lump.url}))
       dispatch(setFooter({...lump.footer})) 
       dispatch(setColor(integerToColor(lump.color)))
-      dispatch(setImage(lump.image.url))
-      dispatch(setThumbnail(lump.thumbnail.url))
+      dispatch(setImage(lump.image))
+      dispatch(setThumbnail(lump.thumbnail))
       dispatch(removeAllFields())
       lump.fields.forEach((f,i) => {
         dispatch(addField())
