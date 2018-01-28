@@ -26,8 +26,6 @@ const App = React.createClass({
     };
   },
 
-
-
   componentWillMount() {
     //this.validateInput(this.state.input, this.state.webhookMode);
   },
@@ -52,7 +50,7 @@ const App = React.createClass({
   },
 
   updateError(err) {
-    this.setState({error: err})
+    this.setState({ error: err })
   },
 
   render() {
@@ -62,30 +60,30 @@ const App = React.createClass({
 
     return (
       <Provider store={store}>
-      <main className="vh-100-l bg-blurple whitney ">
+        <main className="vh-100-l bg-blurple whitney ">
 
-        <div className="h-100 flex flex-column">
-          <section className="flex-l flex-auto">
-            <div className="vh-100 h-auto-l w-100 w-50-l pa4 pr3-l pb0-l">
-              <DiscordView
-                error={this.state.error}
-                webhookMode={this.state.webhookMode}
-                darkTheme={this.state.darkTheme}
-                compactMode={this.state.compactMode}
-              />
-            </div>
-            <div className="clipboard w-100 w-50-l pa4 pl3-l pb0">
-              <ClipboardContainer/>
-              <CodeMirrorContainer
-                theme={'one-dark'}
-                updateError={this.updateError}
-              />
-            </div>
-          </section>
-          <footer className="w-100 pa3 tc white">
-          </footer>
-        </div>
-      </main>
+          <div className="h-100 flex flex-column">
+            <section className="flex-l flex-auto">
+              <div className="vh-100 h-auto-l w-100 w-50-l pa4 pr3-l pb0-l">
+                <DiscordView
+                  error={this.state.error}
+                  webhookMode={this.state.webhookMode}
+                  darkTheme={this.state.darkTheme}
+                  compactMode={this.state.compactMode}
+                />
+              </div>
+              <div className="clipboard w-100 w-50-l pa4 pl3-l pb0">
+                <ClipboardContainer />
+                <CodeMirrorContainer
+                  theme={'one-dark'}
+                  updateError={this.updateError}
+                />
+              </div>
+            </section>
+            <footer className="w-100 pa3 tc white">
+            </footer>
+          </div>
+        </main>
       </Provider>
     );
   },
