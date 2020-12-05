@@ -15,28 +15,11 @@ class Clipboard extends React.Component {
 
     let prefix = "";
     const vc = this.state.viewCommand;
-    if (this.state.viewType == 1)
-      prefix = ".acr \"" + vc + "\" ";
-    else if (this.state.viewType == 2)
+   if (this.state.viewType == 2)
       prefix = ".. \"" + vc + "\" ";
     return (
       <div>
         <div className="tabs align-middle">
-          <div 
-            className={typeTabClasses + (this.state.viewType == 0 ? " selected" : "")} 
-            onClick={() => this.setState({viewType: 0})}>
-            None
-          </div>
-          <div 
-            className={typeTabClasses + (this.state.viewType == 1 ? " selected" : "")} 
-            onClick={() => this.setState({viewType: 1})}>
-            Custom Reaction
-          </div>
-          <div 
-            className={typeTabClasses + (this.state.viewType == 2 ? " selected" : "")} 
-            onClick={() => this.setState({viewType: 2})}>
-            Quote
-          </div>
         </div>,
         <div className="cmd-name">
           <input
@@ -47,7 +30,7 @@ class Clipboard extends React.Component {
             type="text" placeholder="Name"
             onChange={(e) => this.setState({viewCommand: e.target.value})} />
           <CopyToClipboard text={prefix+this.props.value}>
-            <button className="cmd-btn cmd-action whitney">Copy 🔗</button>
+            <button className="cmd-btn cmd-action whitney">Copy JSON</button>
           </CopyToClipboard>
         </div>
       </div>

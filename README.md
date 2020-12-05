@@ -1,7 +1,7 @@
-Embed builder v2 for Nadeko
+# embed builder for kaogurai
+note: this is just a fork of [nadeko's embed builder](https://gitlab.com/Kwoth/embed-visualizer)
 
-## To setup
+## self hosting setup
+open up your favorite terminal and type:
+```git clone https://github.com/aleclol/embed && cd embed && npm i && npm start```
 
-`git clone https://github.com/Kwoth/embed-visualizer`  
-`npm install`  
-`npm start`  

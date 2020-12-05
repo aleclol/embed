@@ -16,14 +16,7 @@ class MessageBody extends React.Component {
     }
   }
 
-  renderInput(){
-    return <textarea 
-    value={this.props.content} 
-    onChange={(ev)=>this.props.onUpdate(ev.target.value)}
-    placeholder="Message body, markdown accepted">
-      {this.props.content}
-    </textarea>
-  }
+  renderInput(){}
 
   renderCompactContent(){
     return <div

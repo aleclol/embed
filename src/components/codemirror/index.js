@@ -50,7 +50,6 @@ const filterState = (state) => {
 
 const mapState = (state) => {
   const mappedState = {
-    plainText: state.messageBody,
     title: state.title.title,
     url: state.title.url,
     description: state.description,
@@ -76,7 +75,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (fromJSON, change) => {
       const defaultObject = {
-        plainText: '',
         title: '',
         url: '',
         description: '',
@@ -102,7 +100,6 @@ const mapDispatchToProps = (dispatch) => {
       }
       const lump = Object.assign(defaultObject, fromJSON) 
 
-      dispatch(setMessageBody(lump.plainText)) 
       dispatch(setAuthor({...lump.author})) 
       dispatch(setDescription(lump.description)) 
       dispatch(setTitle({title: lump.title, url: lump.url}))
