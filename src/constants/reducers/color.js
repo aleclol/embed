@@ -1,6 +1,6 @@
 import { SET_COLOR } from 'constants/types';
 
-const color = (state = '#fef797', action) => {
+const color = (state = '#b6e3f0', action) => {
     switch (action.type) {
       case SET_COLOR:
         return action.color

@@ -72,7 +72,7 @@ const DiscordView = React.createClass({
     return {
       // TODO: make these two configurable?
       username: 'kaogurai',
-      avatar_url: 'https://i.imgur.com/ltitJye.jpg',
+      avatar_url: 'https://i.imgur.com/91HwmKi.jpg',
 
       // hehe
       darkTheme: true,
